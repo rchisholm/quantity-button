@@ -53,16 +53,14 @@ export default class QuantityInput {
     // Ensure quantity is a valid number
     if (isNaN(quantity)) quantity = 1;
 
-    // Check range
-    if (this.min <= (quantity + change) && this.max >= (quantity + change)) {
-      // Change quantity
-      quantity += change;
-  
-      // Ensure quantity is always a number
-      quantity = Math.max(quantity, 1);
-  
-      // Output number
-      this.input.value = quantity;
-    }
+    // Change quantity
+    quantity += change;
+
+    // Ensure quantity is within range
+    quantity = Math.max(quantity, min);
+    quantity = Math.min(quantity, max);
+
+    // Output number
+    this.input.value = quantity;
   }
 }
