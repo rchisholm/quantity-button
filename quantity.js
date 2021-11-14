@@ -16,7 +16,7 @@ export default class QuantityInput {
 
     // Create input
     this.input = document.createElement('input');
-    this.input.value = 1;
+    this.input.value = min;
     this.input.type = 'number';
     this.input.name = 'quantity';
     this.input.pattern = '[0-9]+';
