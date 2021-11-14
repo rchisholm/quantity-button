@@ -60,8 +60,8 @@ export default class QuantityInput {
     quantity += change;
 
     // Ensure quantity is within range
-    quantity = Math.max(quantity, min);
-    quantity = Math.min(quantity, max);
+    quantity = Math.max(quantity, this.min);
+    quantity = Math.min(quantity, this.max);
 
     // Output number
     this.input.value = quantity;
