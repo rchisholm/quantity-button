@@ -4,17 +4,22 @@
  *  @param {DOMobject} element to create a quantity wrapper around
  */
 export default class QuantityInput {
-  constructor(self, decreaseText, increaseText) {
+  constructor(self, decreaseText, increaseText, min, max) {
+
+    // Get text for buttons
+    this.decreaseText = decreaseText || 'Decrease quantity';
+    this.increaseText = increaseText || 'Increase quantity';
+
+    // Get min + max
+    this.min = min || 1;
+    this.max = max || 999999999;
+
     // Create input
     this.input = document.createElement('input');
     this.input.value = 1;
     this.input.type = 'number';
     this.input.name = 'quantity';
     this.input.pattern = '[0-9]+';
-
-    // Get text for buttons
-    this.decreaseText = decreaseText || 'Decrease quantity';
-    this.increaseText = increaseText || 'Increase quantity';
 
     // Button constructor
     function Button(text, className){
@@ -48,13 +53,16 @@ export default class QuantityInput {
     // Ensure quantity is a valid number
     if (isNaN(quantity)) quantity = 1;
 
-    // Change quantity
-    quantity += change;
-
-    // Ensure quantity is always a number
-    quantity = Math.max(quantity, 1);
-
-    // Output number
-    this.input.value = quantity;
+    // Check range
+    if (this.min <= (quantity + change) && this.max >= (quantity + change)) {
+      // Change quantity
+      quantity += change;
+  
+      // Ensure quantity is always a number
+      quantity = Math.max(quantity, 1);
+  
+      // Output number
+      this.input.value = quantity;
+    }
   }
 }
