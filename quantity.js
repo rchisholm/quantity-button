@@ -20,6 +20,9 @@ export default class QuantityInput {
     this.input.type = 'number';
     this.input.name = 'quantity';
     this.input.pattern = '[0-9]+';
+    if(self.id) {
+      this.input.id = self.id + "-input";
+    }
 
     // Button constructor
     function Button(text, className){
